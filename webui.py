@@ -302,12 +302,12 @@ with shared.gradio_root:
                                          inputs=refiner_model, outputs=refiner_switch, show_progress=False, queue=False)
 
 
-                    def update_refiner_choices(selected_base_model):
+                    def filter_model_choice(selected_base_model):
                         refiner_choices = ['None'] + list(filter(lambda model: "refiner" not in model.lower(), modules.config.model_filenames))
                         refiner_model.choices = refiner_choices
 
 
-                    base_model.change(lambda x: update_refiner_choices(x), inputs=base_model, outputs=refiner_model, show_progress=False, queue=False)
+                    base_model.change(lambda model: filter_model_choice(model), inputs=base_model, outputs=refiner_model, show_progress=False, queue=False)
 
 
                 with gr.Group():
