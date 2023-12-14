@@ -312,6 +312,15 @@ with shared.gradio_root:
                     refiner_model.change(lambda x: gr.update(visible=x != 'None'),
                                          inputs=refiner_model, outputs=refiner_switch, show_progress=False, queue=False)
 
+
+                    def filter_model_choice(selected_base_model):
+                        refiner_choices = ['None'] + list(filter(lambda model: "refiner" not in model.lower(), modules.config.model_filenames))
+                        refiner_model.choices = refiner_choices
+
+
+                    base_model.change(lambda model: filter_model_choice(model), inputs=base_model, outputs=refiner_model, show_progress=False, queue=False)
+
+
                 with gr.Group():
                     lora_ctrls = []
 
