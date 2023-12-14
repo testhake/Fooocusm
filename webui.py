@@ -299,7 +299,8 @@ with shared.gradio_root:
                 with gr.Group():
                     with gr.Row():
                         def filter_model_choices(models):
-                            return list(filter(lambda model: "refiner" not in model.lower(), models))
+                            filtered = list(filter(lambda model: "xl" in model.lower(), models))
+                            return list(filter(lambda model: "refiner" not in model.lower(), filtered))
 
                         base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=filter_model_choices(modules.config.model_filenames), value=modules.config.default_base_model_name, show_label=True)
                         refiner_model = gr.Dropdown(label='Refiner (SDXL or SD 1.5)', choices=['None'] + modules.config.model_filenames, value=modules.config.default_refiner_model_name, show_label=True)
