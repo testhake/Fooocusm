@@ -298,7 +298,10 @@ with shared.gradio_root:
             with gr.Tab(label='Model'):
                 with gr.Group():
                     with gr.Row():
-                        base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
+                        def filter_model_choices(models):
+                            return list(filter(lambda model: "refiner" not in model.lower(), models))
+
+                        base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=filter_model_choices(modules.config.model_filenames), value=modules.config.default_base_model_name, show_label=True)
                         refiner_model = gr.Dropdown(label='Refiner (SDXL or SD 1.5)', choices=['None'] + modules.config.model_filenames, value=modules.config.default_refiner_model_name, show_label=True)
 
                     refiner_switch = gr.Slider(label='Refiner Switch At', minimum=0.1, maximum=1.0, step=0.0001,
@@ -311,15 +314,6 @@ with shared.gradio_root:
 
                     refiner_model.change(lambda x: gr.update(visible=x != 'None'),
                                          inputs=refiner_model, outputs=refiner_switch, show_progress=False, queue=False)
-
-
-                    def filter_model_choice(selected_base_model):
-                        refiner_choices = ['None'] + list(filter(lambda model: "refiner" not in model.lower(), modules.config.model_filenames))
-                        refiner_model.choices = refiner_choices
-
-
-                    base_model.change(lambda model: filter_model_choice(model), inputs=base_model, outputs=refiner_model, show_progress=False, queue=False)
-
 
                 with gr.Group():
                     lora_ctrls = []
