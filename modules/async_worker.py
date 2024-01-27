@@ -119,73 +119,40 @@ def worker():
     def handler(async_task):
         execution_start_time = time.perf_counter()
 
-        args = async_task.args
-        args.reverse()
+        prompt, negative_prompt, style_selections, performance_selection, aspect_ratios_selection, image_number, \
+            image_seed, sharpness, guidance_scale, base_model_name, refiner_model_name, refiner_switch, \
+            l1, w1, l2, w2, l3, w3, l4, w4, l5, w5, \
+            input_image_checkbox, current_tab, uov_method, uov_input_image, \
+            outpaint_selections, inpaint_input_image, inpaint_additional_prompt, inpaint_mask_image_upload, \
+            disable_preview, adm_scaler_positive, adm_scaler_negative, adm_scaler_end, adaptive_cfg, sampler_name, \
+            scheduler_name, overwrite_step, overwrite_switch, overwrite_width, overwrite_height, overwrite_vary_strength, \
+            overwrite_upscale_strength, mixing_image_prompt_and_vary_upscale, mixing_image_prompt_and_inpaint, \
+            debugging_cn_preprocessor, skipping_cn_preprocessor, canny_low_threshold, canny_high_threshold, \
+            refiner_swap_method, controlnet_softness, freeu_enabled, freeu_b1, freeu_b2, freeu_s1, freeu_s2, \
+            debugging_inpaint_preprocessor, inpaint_disable_initial_latent, inpaint_engine, inpaint_strength, \
+            inpaint_respective_field, inpaint_mask_upload_checkbox, invert_mask_checkbox, inpaint_erode_or_dilate, \
+            cn_img1, cn_stop1, cn_weight1, cn_type1, \
+            cn_img2, cn_stop2, cn_weight2, cn_type2, \
+            cn_img3, cn_stop3, cn_weight3, cn_type3, \
+            cn_img4, cn_stop4, cn_weight4, cn_type4 = async_task.args
 
-        prompt = args.pop()
-        negative_prompt = args.pop()
-        style_selections = args.pop()
-        performance_selection = args.pop()
-        aspect_ratios_selection = args.pop()
-        image_number = args.pop()
-        image_seed = args.pop()
-        sharpness = args.pop()
-        guidance_scale = args.pop()
-        base_model_name = args.pop()
-        refiner_model_name = args.pop()
-        refiner_switch = args.pop()
-        loras = [[str(args.pop()), float(args.pop())] for _ in range(5)]
-        input_image_checkbox = args.pop()
-        current_tab = args.pop()
-        uov_method = args.pop()
-        uov_input_image = args.pop()
-        outpaint_selections = args.pop()
-        inpaint_input_image = args.pop()
-        inpaint_additional_prompt = args.pop()
-        inpaint_mask_image_upload = args.pop()
-        disable_preview = args.pop()
-        adm_scaler_positive = args.pop()
-        adm_scaler_negative = args.pop()
-        adm_scaler_end = args.pop()
-        adaptive_cfg = args.pop()
-        sampler_name = args.pop()
-        scheduler_name = args.pop()
-        overwrite_step = args.pop()
-        overwrite_switch = args.pop()
-        overwrite_width = args.pop()
-        overwrite_height = args.pop()
-        overwrite_vary_strength = args.pop()
-        overwrite_upscale_strength = args.pop()
-        mixing_image_prompt_and_vary_upscale = args.pop()
-        mixing_image_prompt_and_inpaint = args.pop()
-        debugging_cn_preprocessor = args.pop()
-        skipping_cn_preprocessor = args.pop()
-        canny_low_threshold = args.pop()
-        canny_high_threshold = args.pop()
-        refiner_swap_method = args.pop()
-        controlnet_softness = args.pop()
-        freeu_enabled = args.pop()
-        freeu_b1 = args.pop()
-        freeu_b2 = args.pop()
-        freeu_s1 = args.pop()
-        freeu_s2 = args.pop()
-        debugging_inpaint_preprocessor = args.pop()
-        inpaint_disable_initial_latent = args.pop()
-        inpaint_engine = args.pop()
-        inpaint_strength = args.pop()
-        inpaint_respective_field = args.pop()
-        inpaint_mask_upload_checkbox = args.pop()
-        invert_mask_checkbox = args.pop()
-        inpaint_erode_or_dilate = args.pop()
+        loras = [
+            (str(l1), float(w1)),
+            (str(l2), float(w2)),
+            (str(l3), float(w3)),
+            (str(l4), float(w4)),
+            (str(l5), float(w5)),
+        ]
 
         cn_tasks = {x: [] for x in flags.ip_list}
-        for _ in range(4):
-            cn_img = args.pop()
-            cn_stop = args.pop()
-            cn_weight = args.pop()
-            cn_type = args.pop()
-            if cn_img is not None:
-                cn_tasks[cn_type].append([cn_img, cn_stop, cn_weight])
+        if cn_img1 is not None:
+            cn_tasks[cn_type1].append([cn_img1, cn_stop1, cn_weight1])
+        if cn_img2 is not None:
+            cn_tasks[cn_type2].append([cn_img2, cn_stop2, cn_weight2])
+        if cn_img3 is not None:
+            cn_tasks[cn_type3].append([cn_img3, cn_stop3, cn_weight3])
+        if cn_img4 is not None:
+            cn_tasks[cn_type4].append([cn_img4, cn_stop4, cn_weight4])
 
         outpaint_selections = [o.lower() for o in outpaint_selections]
         base_model_additional_loras = []
