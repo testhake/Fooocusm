@@ -1171,6 +1171,8 @@ def worker():
             current_progress += 1
             progressbar(async_task, current_progress, 'Image processing ...')
 
+        should_enhance = async_task.enhance_checkbox and (async_task.enhance_uov_method != flags.disabled.casefold() or len(async_task.enhance_ctrls) > 0)
+
         if 'vary' in goals:
             async_task.uov_input_image, denoising_strength, initial_latent, width, height, current_progress = apply_vary(
                 async_task, async_task.uov_method, denoising_strength, async_task.uov_input_image, switch,
@@ -1349,6 +1351,7 @@ def worker():
                     async_task.prompt, async_task.negative_prompt, final_scheduler_name, height, img, preparation_steps,
                     switch, tiled, total_count, use_expansion, use_style, use_synthetic_refiner, width, persist_image)
                 async_task.enhance_stats[index] += 1
+
                 if exception_result == 'continue':
                     continue
                 elif exception_result == 'break':
@@ -1450,6 +1453,7 @@ def worker():
                     preparation_steps, switch, tiled, total_count, use_expansion, use_style, use_synthetic_refiner,
                     width, persist_image)
                 async_task.enhance_stats[index] += 1
+                
                 if exception_result == 'continue':
                     continue
                 elif exception_result == 'break':
