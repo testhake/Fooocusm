@@ -35,7 +35,7 @@ function resized() {
 }
 
 function viewer_to_top(delay = 100) {
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), delay);
+    setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), delay);
 }
 
 function viewer_to_bottom(delay = 100) {
@@ -46,7 +46,7 @@ function viewer_to_bottom(delay = 100) {
         yPos = element.getBoundingClientRect().top + window.scrollY;
     }
 
-    setTimeout(() => window.scrollTo({ top: yPos - 8, behavior: 'smooth' }), delay);
+    setTimeout(() => window.scrollTo({top: yPos - 8, behavior: 'smooth'}), delay);
 }
 
 window.addEventListener('resize', (e) => {
@@ -60,16 +60,8 @@ onUiLoaded(async () => {
 function on_style_selection_blur() {
     let target = document.querySelector("#gradio_receiver_style_selections textarea");
     target.value = "on_style_selection_blur " + Math.random();
-    let e = new Event("input", { bubbles: true })
-    Object.defineProperty(e, "target", { value: target })
-    target.dispatchEvent(e);
-}
-
-function on_prompt_style_selection_blur() {
-    let target = document.querySelector("#gradio_receiver_prompt_style_selections textarea");
-    target.value = "on_prompt_style_selection_blur " + Math.random();
-    let e = new Event("input", { bubbles: true })
-    Object.defineProperty(e, "target", { value: target })
+    let e = new Event("input", {bubbles: true})
+    Object.defineProperty(e, "target", {value: target})
     target.dispatchEvent(e);
 }
 
