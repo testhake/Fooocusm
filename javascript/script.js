@@ -4,7 +4,7 @@ function gradioApp() {
     const elem = elems.length == 0 ? document : elems[0];
 
     if (elem !== document) {
-        elem.getElementById = function (id) {
+        elem.getElementById = function(id) {
             return document.getElementById(id);
         };
     }
@@ -96,15 +96,15 @@ function executeCallbacks(queue, arg) {
  */
 function scheduleAfterUiUpdateCallbacks() {
     clearTimeout(uiAfterUpdateTimeout);
-    uiAfterUpdateTimeout = setTimeout(function () {
+    uiAfterUpdateTimeout = setTimeout(function() {
         executeCallbacks(uiAfterUpdateCallbacks);
     }, 200);
 }
 
 var executedOnLoaded = false;
 
-document.addEventListener("DOMContentLoaded", function () {
-    var mutationObserver = new MutationObserver(function (m) {
+document.addEventListener("DOMContentLoaded", function() {
+    var mutationObserver = new MutationObserver(function(m) {
         if (!executedOnLoaded && gradioApp().querySelector('#generate_button')) {
             executedOnLoaded = true;
             executeCallbacks(uiLoadedCallbacks);
@@ -118,19 +118,19 @@ document.addEventListener("DOMContentLoaded", function () {
             executeCallbacks(uiTabChangeCallbacks);
         }
     });
-    mutationObserver.observe(gradioApp(), { childList: true, subtree: true });
+    mutationObserver.observe(gradioApp(), {childList: true, subtree: true});
     initStylePreviewOverlay();
 });
 
-var onAppend = function (elem, f) {
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (m) {
+var onAppend = function(elem, f) {
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
             if (m.addedNodes.length) {
                 f(m.addedNodes);
             }
         });
     });
-    observer.observe(elem, { childList: true });
+    observer.observe(elem, {childList: true});
 }
 
 function addObserverIfDesiredNodeAvailable(querySelector, callback) {
@@ -146,27 +146,27 @@ function addObserverIfDesiredNodeAvailable(querySelector, callback) {
 /**
  * Show reset button on toast "Connection errored out."
  */
-addObserverIfDesiredNodeAvailable(".toast-wrap", function (added) {
-    added.forEach(function (element) {
-        if (element.innerText.includes("Connection errored out.")) {
-            window.setTimeout(function () {
+addObserverIfDesiredNodeAvailable(".toast-wrap", function(added) {
+    added.forEach(function(element) {
+         if (element.innerText.includes("Connection errored out.")) {
+             window.setTimeout(function() {
                 document.getElementById("reset_button").classList.remove("hidden");
                 document.getElementById("generate_button").classList.add("hidden");
                 document.getElementById("skip_button").classList.add("hidden");
                 document.getElementById("stop_button").classList.add("hidden");
             });
-        }
+         }
     });
 });
 
 /**
  * Add a ctrl+enter as a shortcut to start a generation
  */
-document.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function(e) {
     const isModifierKey = (e.metaKey || e.ctrlKey || e.altKey);
     const isEnterKey = (e.key == "Enter" || e.keyCode == 13);
 
-    if (isModifierKey && isEnterKey) {
+    if(isModifierKey && isEnterKey) {
         const generateButton = gradioApp().querySelector('button:not(.hidden)[id=generate_button]');
         if (generateButton) {
             generateButton.click();
@@ -175,7 +175,7 @@ document.addEventListener('keydown', function (e) {
         }
 
         const stopButton = gradioApp().querySelector('button:not(.hidden)[id=stop_button]')
-        if (stopButton) {
+        if(stopButton) {
             stopButton.click();
             e.preventDefault();
             return;
@@ -186,15 +186,12 @@ document.addEventListener('keydown', function (e) {
 function initStylePreviewOverlay() {
     let overlayVisible = false;
     const samplesPath = document.querySelector("meta[name='samples-path']").getAttribute("content")
-    //const stylesPath = document.querySelector("meta[name='styles-path']").getAttribute("content")
     const overlay = document.createElement('div');
     const tooltip = document.createElement('div');
     tooltip.className = 'preview-tooltip';
     overlay.appendChild(tooltip);
     overlay.id = 'stylePreviewOverlay';
     document.body.appendChild(overlay);
-
-
     document.addEventListener('mouseover', function (e) {
         const label = e.target.closest('.style_selections label');
         if (!label) return;
@@ -204,26 +201,13 @@ function initStylePreviewOverlay() {
         overlay.style.opacity = "1";
         const originalText = label.querySelector("span").getAttribute("data-original-text");
         const name = originalText || label.querySelector("span").textContent;
-
         overlay.style.backgroundImage = `url("${samplesPath.replace(
             "fooocus_v2",
             name.toLowerCase().replaceAll(" ", "_")
         ).replaceAll("\\", "\\\\")}")`;
 
-
-        //let styleValuesElement = document.getElementById('style_values_json');
-        //let styleContent = styleValuesElement.textContent
-        //let styleContent = styleValuesElement.textContent.replaceAll('{', '%').replaceAll('}', '·').replaceAll('[', '{').replaceAll(']', '}').replaceAll('%', '[').replaceAll('·', ']');
-        //console.log(`${styleContent}`);
-        //let styleValues = JSON.parse(styleContent);
-
-
-        //console.log(`The variable is: ${name}`);
-        //console.log(`${styleValues[name]}`);
-
         tooltip.textContent = name;
-        //tooltip.textContent = styleValues[name];
-        //console.log(`${styleValues[name]}`);
+
         function onMouseLeave() {
             overlayVisible = false;
             overlay.style.opacity = "0";
@@ -274,6 +258,6 @@ function set_theme(theme) {
 }
 
 function htmlDecode(input) {
-    var doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent;
+  var doc = new DOMParser().parseFromString(input, "text/html");
+  return doc.documentElement.textContent;
 }
