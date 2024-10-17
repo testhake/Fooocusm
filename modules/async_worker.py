@@ -31,6 +31,7 @@ class AsyncTask:
         self.negative_prompt = args.pop()
         self.translate_prompts = args.pop()
         self.style_selections = args.pop()
+        self.prompt_style_selections = args.pop()
 
         self.performance_selection = Performance(args.pop())
         self.steps = self.performance_selection.steps()
@@ -192,6 +193,7 @@ def worker():
     import fooocus_version
 
     from extras.censor import default_censor
+    from modules.prompt_styles import apply_prompt_style
     from modules.sdxl_styles import apply_style, get_random_style, fooocus_expansion, apply_arrays, random_style_name
     from modules.private_logger import log
     from extras.expansion import safe_str
@@ -645,6 +647,13 @@ def worker():
         negative_prompts = remove_empty_str([safe_str(p) for p in negative_prompt.splitlines()], default='')
         prompt = prompts[0]
         negative_prompt = negative_prompts[0]
+
+        task_prompt_styles = async_task.prompt_style_selections.copy()
+        for promptJ, promptS in enumerate(task_prompt_styles):
+            promptP, promptN = apply_prompt_style(promptS, positive=task_prompt)
+            prompt = prompt + promptP
+            negative_prompt = negative_prompt + promptN
+
         if prompt == '':
             # disable expansion when empty since it is not meaningful and influences image prompt
             use_expansion = False
@@ -689,6 +698,7 @@ def worker():
             negative_basic_workloads = []
 
             task_styles = async_task.style_selections.copy()
+
             if use_style:
                 placeholder_replaced = False
 
