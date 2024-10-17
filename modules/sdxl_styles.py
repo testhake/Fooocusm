@@ -4,6 +4,7 @@ import json
 import math
 
 from modules.extra_utils import get_files_from_folder
+from modules.extra_utils import merge_json_files
 from random import Random
 
 # cannot use modules.config - validators causing circular imports
@@ -23,6 +24,15 @@ def normalize_key(k):
 
 
 styles = {}
+#stylesJson = ""
+# stringBase = '''
+# {
+#     "%s":
+#         {
+#             "pos": "%s",
+#             "neg": "%s"
+#         }
+# },'''
 styles_files = get_files_from_folder(styles_path, ['.json'])
 
 for x in ['sdxl_styles_fooocus.json',
@@ -43,9 +53,14 @@ for styles_file in styles_files:
                 prompt = entry['prompt'] if 'prompt' in entry else ''
                 negative_prompt = entry['negative_prompt'] if 'negative_prompt' in entry else ''
                 styles[name] = (prompt, negative_prompt)
+                #stylesJson = stylesJson + "\n{" + f"\n\t\"{name}\":" + "\n\t{" + f"\n\t\"pos\": \"{prompt}\"" + f"\n\"neg\": \"{negative_prompt}\"" + "\n}" + "}," 
+                #stylesJson = stylesJson + f"{{\r\n    \"{name}\":\r\n        {{\r\n            \"pos\": \"{prompt}\",\r\n            \"neg\": \"{negative_prompt}\"\r\n        }}\r\n}},"
     except Exception as e:
         print(str(e))
         print(f'Failed to load style file {styles_file}')
+
+#stylesJson = stylesJson[:-1]
+#stylesJson = "[\n" + stylesJson + "\n]"
 
 style_keys = list(styles.keys())
 fooocus_expansion = 'Fooocus V2'
@@ -59,7 +74,7 @@ def get_random_style(rng: Random) -> str:
 
 def apply_style(style, positive):
     p, n = styles[style]
-    return p.replace('{prompt}', positive).splitlines(), n.splitlines(), '{prompt}' in p
+    return p, n
 
 
 def get_words(arrays, total_mult, index):
@@ -95,3 +110,9 @@ def apply_arrays(text, index):
     
     return text
 
+def get_positive(style):
+    p, n = styles[style]
+    return p
+def get_negative(style):
+    p, n = styles[style]
+    return n

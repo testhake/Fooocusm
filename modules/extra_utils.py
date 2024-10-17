@@ -1,6 +1,6 @@
 import os
 from ast import literal_eval
-
+import json
 
 def makedirs_with_log(path):
     try:
@@ -39,3 +39,13 @@ def try_eval_env_var(value: str, expected_type=None):
         return value_eval
     except:
         return value
+
+def merge_json_files(styles_path, filenames):
+    merged_data = []
+    for filename in filenames:
+        #with open(path, 'r') as file:
+        with open(os.path.join(styles_path, filename), encoding='utf-8') as file:
+            data = json.load(file)
+            merged_data.append(data)
+    return merged_data
+        
