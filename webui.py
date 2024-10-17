@@ -11,9 +11,7 @@ import modules.async_worker as worker
 import modules.constants as constants
 import modules.flags as flags
 import modules.gradio_hijack as grh
-import modules.sdxl_styles as sdxl_styles
 import modules.style_sorter as style_sorter
-import modules.style_sorter_prompt as prompt_style_sorter
 import modules.meta_parser
 import args_manager
 import copy
@@ -21,7 +19,6 @@ import launch
 from extras.inpaint_mask import SAMOptions
 
 from modules.sdxl_styles import legal_style_names
-from modules.prompt_styles import legal_prompt_style_names
 from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
 from modules.auth import auth_enabled, check_auth
@@ -642,10 +639,6 @@ with shared.gradio_root:
                                                     elem_classes=['style_selections'])
                 gradio_receiver_style_selections = gr.Textbox(elem_id='gradio_receiver_style_selections', visible=False)
 
-                # Hidden JSON component to store the positive and negative values
-                #sdxlS = copy.deepcopy(sdxl_styles.stylesJson);
-                #style_values_json = gr.JSON(visible=False, elem_id="style_values_json", value={style: {'positive': sdxl_styles.get_positive(style), 'negative': sdxl_styles.get_negative(style)} for style in sdxlS})
-                #style_values_json = gr.Code(visible=False, elem_id="style_values_json", value=sdxlS)
                 shared.gradio_root.load(lambda: gr.update(choices=copy.deepcopy(style_sorter.all_styles)),
                                         outputs=style_selections)
 
@@ -662,35 +655,6 @@ with shared.gradio_root:
                                                        queue=False,
                                                        show_progress=False).then(
                     lambda: None, _js='()=>{refresh_style_localization();}')
-
-            with gr.Tab(label='Prompts', elem_classes=['style_selections_tab']):
-                prompt_style_sorter.try_load_sorted_styles(
-                    style_names=legal_prompt_style_names)
-
-                prompt_style_search_bar = gr.Textbox(show_label=False, container=False,
-                                              placeholder="\U0001F50E Type here to search prompt styles ...",
-                                              value="",
-                                              label='Search Prompt Styles')
-                prompt_style_selections = gr.CheckboxGroup(show_label=False, container=False,
-                                                    choices=copy.deepcopy(prompt_style_sorter.all_prompt_styles),
-                                                    label='Selected Styles',
-                                                    elem_classes=['style_selections'])
-                gradio_receiver_prompt_style_selections = gr.Textbox(elem_id='gradio_receiver_prompt_style_selections', visible=False)
-
-                shared.gradio_root.load(lambda: gr.update(choices=copy.deepcopy(prompt_style_sorter.all_prompt_styles)),
-                                        outputs=prompt_style_selections)
-
-                prompt_style_search_bar.change(prompt_style_sorter.search_styles,
-                                        inputs=[prompt_style_selections, prompt_style_search_bar],
-                                        outputs=prompt_style_selections,
-                                        queue=False,
-                                        show_progress=False)
-
-                gradio_receiver_prompt_style_selections.input(prompt_style_sorter.sort_styles,
-                                                       inputs=prompt_style_selections,
-                                                       outputs=prompt_style_selections,
-                                                       queue=False,
-                                                       show_progress=False)
 
             with gr.Tab(label='Models'):
                 with gr.Group():
