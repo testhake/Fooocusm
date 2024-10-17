@@ -1,0 +1,48 @@
+[
+    {
+        "name": "(main) Pony Default",
+        "prompt": "score_9, score_8_up, score_7_up, {prompt}"
+    },
+    {
+        "name": "(main) Pony Score_4_up Masterpiece",
+        "prompt": "masterpiece, best quality, highly detailed, score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, {prompt}"
+    },
+    {
+        "name": "(main) Pony Negative Default",
+        "negative_prompt": "score_4, score_5, score_6"
+    },
+    {
+        "name": "(main_checkpoint) Pony Autism score_4_up",
+        "prompt": "score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, BREAK, {prompt}"
+    },
+    {
+        "name": "(main_checkpoint) Cyberrealistic",
+        "prompt": "score_9, score_8_up, score_7_up, {prompt}",
+        "negative_prompt": "score_6, score_5, score_4, source_pony, source_anime, source_furry, source_cartoon, worst quality, low quality"
+    },
+    {
+        "name": "(main_checkpoint) Pony Realism",
+        "prompt": "score_9, score_8_up, score_7_up, BREAK, {prompt}",
+        "negative_prompt": "score_4, score_5, score_6"
+    },
+    {
+        "name": "(plus_checkpoint) Realdream Human (negative)",
+        "negative_prompt": "amputee, deformed body, long neck, extra fingers, bad body proportions, mutated hands, mutilated, mutation, ugly, fused fingers, malformed limbs, extra heads, disfigured"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Recommended 1",
+        "prompt": "beautiful aesthetic, very intricate, high quality details"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Recommended 2",
+        "prompt": "vibrant, highly detailed, award-winning, professional"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Realism",
+        "prompt": "ultra realistic, masterpiece, high detailed skin"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Anime",
+        "prompt": "anime artwork, anime style, studio anime"
+    }
+]

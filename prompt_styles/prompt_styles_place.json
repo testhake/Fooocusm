@@ -1,0 +1,126 @@
+[
+  {
+      "name": "(place) Cute Bedroom",
+      "prompt": "cute bedroom"
+  },
+  {
+      "name": "(place) Bedroom",
+      "prompt": "bedroom"
+  },
+  {
+      "name": "(place) Kitchen",
+      "prompt": "kitchen"
+  },
+  {
+      "name": "(place) Dining Room",
+      "prompt": "dining room"
+  },
+  {
+      "name": "(place) Bathroom",
+      "prompt": "bathroom"
+  },
+  {
+      "name": "(place) Living Room",
+      "prompt": "living room"
+  },
+  {
+      "name": "(place) Laundry Room",
+      "prompt": "laundry room"
+  },
+  {
+      "name": "(place) Home Swimming Pool",
+      "prompt": "home backyard swimming-pool"
+  },
+  {
+      "name": "(place) Backyard",
+      "prompt": "home backyard"
+  },
+  {
+      "name": "(place) Attic",
+      "prompt": "dark attic"
+  },
+  {
+      "name": "(place) Cellar",
+      "prompt": "dark cellar"
+  },
+  {
+      "name": "(place) Basement",
+      "prompt": "dark basement"
+  },
+  {
+      "name": "(place) Loft",
+      "prompt": "loft"
+  },
+  {
+      "name": "(place) Garage",
+      "prompt": "garage"
+  },
+  {
+      "name": "(place) Restaurant",
+      "prompt": "restaurant"
+  },
+  {
+      "name": "(place) Restaurant Fancy",
+      "prompt": "fancy restaurant"
+  },
+  {
+      "name": "(place) Classroom",
+      "prompt": "school classroom"
+  },
+  {
+      "name": "(place) Beach",
+      "prompt": "beach"
+  },
+  {
+      "name": "(place) Hotel Room (rundown)",
+      "prompt": "rundown hotel room"
+  },
+  {
+      "name": "(place) Hotel Room (fancy)",
+      "prompt": "fancy hotel room"
+  },
+  {
+      "name": "(place) Cinema",
+      "prompt": "cinema"
+  },
+  {
+      "name": "(place) Church",
+      "prompt": "church"
+  },
+  {
+      "name": "(place) Hospital",
+      "prompt": "hospital room"
+  },
+  {
+      "name": "(place) Zoo",
+      "prompt": "zoo"
+  },
+  {
+      "name": "(place) Swimming Pool",
+      "prompt": "public swimming-pool"
+  },
+  {
+      "name": "(place) Grocery Store",
+      "prompt": "grocery store"
+  },
+  {
+      "name": "(place) Train",
+      "prompt": "inside train"
+  },
+  {
+      "name": "(place) Car",
+      "prompt": "inside car"
+  },
+  {
+      "name": "(place) Bus",
+      "prompt": "inside bus"
+  },
+  {
+      "name": "(place) Mall",
+      "prompt": "mall"
+  },
+  {
+      "name": "(place) Park",
+      "prompt": "park"
+  }
+]

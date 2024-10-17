@@ -1,0 +1,26 @@
+[
+  {
+      "name": "(time) Morning",
+      "prompt": "morning, bright colors"
+  },
+  {
+      "name": "(time) Day",
+      "prompt": "noon daytime, warm colors"
+  },
+  {
+      "name": "(time) Afternoon",
+      "prompt": "afternoon, warm colors"
+  },
+  {
+      "name": "(time) Dawn",
+      "prompt": "dawn, sunrise"
+  },
+  {
+      "name": "(time) Dusk",
+      "prompt": "dusk, sunset, evening twilight"
+  },
+  {
+      "name": "(time) Night",
+      "prompt": "night evening midnight, cold colors"
+  }
+]
