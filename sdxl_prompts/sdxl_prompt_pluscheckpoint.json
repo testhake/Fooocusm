@@ -1,0 +1,22 @@
+[
+    {
+        "name": "(plus_checkpoint) Realdream Human (negative)",
+        "negative_prompt": "amputee, deformed body, long neck, extra fingers, bad body proportions, mutated hands, mutilated, mutation, ugly, fused fingers, malformed limbs, extra heads, disfigured"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Recommended 1",
+        "prompt": "beautiful aesthetic, very intricate, high quality details"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Recommended 2",
+        "prompt": "vibrant, highly detailed, award-winning, professional"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Realism",
+        "prompt": "ultra realistic, masterpiece, high detailed skin"
+    },
+    {
+        "name": "(plus_checkpoint) Smoothmix Anime",
+        "prompt": "anime artwork, anime style, studio anime"
+    }
+]

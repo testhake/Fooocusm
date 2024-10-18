@@ -58,9 +58,13 @@ onUiLoaded(async () => {
 });
 
 let styleValues;
+let promptValues;
 onUiLoaded(async () => {
     let styleValuesElement = document.getElementById('style_prompts_json').getElementsByTagName("textarea")[0].value;
     styleValues = JSON.parse(styleValuesElement);
+
+    let promptValuesElement = document.getElementById('prompt_prompts_json').getElementsByTagName("textarea")[0].value;
+    promptValues = JSON.parse(promptValuesElement);
 });
 
 function on_style_selection_blur() {
@@ -68,6 +72,13 @@ function on_style_selection_blur() {
     target.value = "on_style_selection_blur " + Math.random();
     let e = new Event("input", {bubbles: true})
     Object.defineProperty(e, "target", {value: target})
+    target.dispatchEvent(e);
+}
+function on_prompt_selection_blur() {
+    let target = document.querySelector("#gradio_receiver_prompt_selections textarea");
+    target.value = "on_prompt_selection_blur " + Math.random();
+    let e = new Event("input", { bubbles: true })
+    Object.defineProperty(e, "target", { value: target })
     target.dispatchEvent(e);
 }
 
@@ -82,6 +93,14 @@ onUiLoaded(async () => {
         setTimeout(() => {
             if (!this.contains(document.activeElement)) {
                 on_style_selection_blur();
+            }
+        }, 200);
+    });
+
+    document.querySelector('.prompt_selections').addEventListener('focusout', function (event) {
+        setTimeout(() => {
+            if (!this.contains(document.activeElement)) {
+                on_prompt_selection_blur();
             }
         }, 200);
     });

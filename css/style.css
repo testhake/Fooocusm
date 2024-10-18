@@ -400,7 +400,42 @@ div:has(> #positive_prompt) {
   text-overflow: ellipsis;
 }
 
-/* styles preview tooltip */
+.contain .tabs {
+    height: 100%;
+}
+
+    .contain .tabs .tabitem.prompt_selections_tab {
+        height: 100%;
+    }
+
+        .contain .tabs .tabitem.prompt_selections_tab > div:first-child {
+            height: 100%;
+        }
+
+        .contain .tabs .tabitem.prompt_selections_tab .prompt_selections {
+            min-height: 200px;
+            height: 100%;
+        }
+
+            .contain .tabs .tabitem.prompt_selections_tab .prompt_selections .wrap[data-testid="checkbox-group"] {
+                position: absolute; /* remove this to disable scrolling within the checkbox-group */
+                overflow: auto;
+                padding-right: 2px;
+                max-height: 100%;
+            }
+
+                .contain .tabs .tabitem.prompt_selections_tab .prompt_selections .wrap[data-testid="checkbox-group"] label {
+                    max-width: calc(35% - 15px) !important; /* add this to enable 3 columns layout */
+                    flex: calc(50% - 5px) !important;
+                }
+
+                    .contain .tabs .tabitem.prompt_selections_tab .prompt_selections .wrap[data-testid="checkbox-group"] label span {
+                        /* white-space:nowrap; */ /* add this to disable text wrapping (better choice for 3 columns layout) */
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+/* styles and prompt preview tooltip */
 .preview-tooltip {
     background-color: #fff8;
     font-family: monospace;
@@ -409,15 +444,16 @@ div:has(> #positive_prompt) {
     /* display: none; /* remove this to enable tooltip in preview image */
 }
 
-/* styles preview prompts */
+/* styles and prompt preview prompts */
 .preview-prompts {
-    background-color: #FFFFFF7F;
-    position: absolute;
+    background-color: #070306B2;
     font-family: monospace;
     text-align: center;
     border-radius: 5px 5px 0px 0px;
     opacity: 0;
     pointer-events: none;
+    position: fixed;
+    z-index: 100;
     /* display: none; /* remove this to enable tooltip in preview image */
 }
 

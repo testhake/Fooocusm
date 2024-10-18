@@ -203,33 +203,54 @@ function initStylePreviewOverlay() {
 
     document.addEventListener('mouseover', function (e) {
         const label = e.target.closest('.style_selections label');
-        if (!label) return;
-        label.removeEventListener("mouseout", onMouseLeave);
-        label.addEventListener("mouseout", onMouseLeave);
-        overlayVisible = true;
-        overlay.style.opacity = "1";
-        const originalText = label.querySelector("span").getAttribute("data-original-text");
-        const name = originalText || label.querySelector("span").textContent;
-        overlay.style.backgroundImage = `url("${samplesPath.replace(
-            "fooocus_v2",
-            name.toLowerCase().replaceAll(" ", "_")
-        ).replaceAll("\\", "\\\\")}")`;
+        const promptLabel = e.target.closest('.prompt_selections label');
+        //if (!label) return;
+        if (label) {
+            label.removeEventListener("mouseout", onMouseLeave);
+            label.addEventListener("mouseout", onMouseLeave);
+            overlayVisible = true;
+            overlay.style.opacity = "1";
+            const originalText = label.querySelector("span").getAttribute("data-original-text");
+            const name = originalText || label.querySelector("span").textContent;
+            overlay.style.backgroundImage = `url("${samplesPath.replace(
+                "fooocus_v2",
+                name.toLowerCase().replaceAll(" ", "_")
+            ).replaceAll("\\", "\\\\")}")`;
 
-        tooltip.textContent = name;
+            tooltip.textContent = name;
 
-        //let styleValuesElement = document.getElementById('style_prompts_json').getElementsByTagName("textarea")[0].value;
-        //let styleValues = JSON.parse(styleValuesElement);
-        //let positive, negative = styleValues[name];
-        //let positive = "masterpiece, good";
-        //let negative = "badhands, ugly, bad quality"
-        if (styleValues[name] !== null) {
-            let positive = styleValues[name].Positive;
-            let negative = styleValues[name].Negative;
-            prompts.style.opacity = "1";
-            prompts.innerHTML = `
-  <span style="color: green; font-weight: bold;">Positive: </span> <br> <span style="color: black;">${positive}</span> <br>
-  <span style="color: red; font-weight: bold;">Negative: </span> <br> <span style="color: black;">${negative}</span>
+            if (styleValues[name] !== null) {
+                let positive = styleValues[name].Positive;
+                let negative = styleValues[name].Negative;
+                prompts.style.opacity = "1";
+                prompts.innerHTML = `
+  <span style="color:#54FF0CFF; font-weight: bold;">Positive: </span> <br> <span style="color:#FFFFFF;">${positive}</span> <br>
+  <span style="color:#FF3426FF; font-weight: bold;">Negative: </span> <br> <span style="color:#FFFFFF;">${negative}</span>
 `;
+            }
+        }
+        else if (promptLabel) {
+            promptLabel.removeEventListener("mouseout", onMouseLeave);
+            promptLabel.addEventListener("mouseout", onMouseLeave);
+            overlayVisible = true;
+            overlay.style.opacity = "1";
+            const originalText = promptLabel.querySelector("span").getAttribute("data-original-text");
+            const name = originalText || promptLabel.querySelector("span").textContent;
+
+            tooltip.textContent = name;
+
+            if (promptValues[name] !== null) {
+                let positive = promptValues[name].Positive;
+                let negative = promptValues[name].Negative;
+                prompts.style.opacity = "1";
+                prompts.innerHTML = `
+  <span style="color:#54FF0CFF; font-weight: bold;">Positive: </span> <br> <span style="color:#FFFFFF;">${positive}</span> <br>
+  <span style="color:#FF3426FF; font-weight: bold;">Negative: </span> <br> <span style="color:#FFFFFF;">${negative}</span>
+`;
+            }
+        }
+        else {
+            return;
         }
 
         function onMouseLeave() {
@@ -237,7 +258,8 @@ function initStylePreviewOverlay() {
             overlay.style.opacity = "0";
             overlay.style.backgroundImage = "";
             prompts.style.opacity = "0";
-            label.removeEventListener("mouseout", onMouseLeave);
+            if (label) label.removeEventListener("mouseout", onMouseLeave);
+            else if (promptLabel) promptLabel.removeEventListener("mouseout", onMouseLeave);
         }
     });
     document.addEventListener('mousemove', function (e) {
@@ -246,8 +268,10 @@ function initStylePreviewOverlay() {
         overlay.style.top = `${e.clientY}px`;
         overlay.className = e.clientY > window.innerHeight / 2 ? "lower-half" : "upper-half";
 
-        prompts.style.top = `${overlay.offsetTop}px`;
+        //prompts.style.left = `${overlay.offsetLeft}px`;
+        //prompts.style.top = `${overlay.offsetTop}px`;
         prompts.style.left = `${overlay.offsetLeft}px`;
+        prompts.style.top = `${e.clientY + (overlay.offsetHeight / 2) - (prompts.offsetHeight / 2)}px`;
     });
 }
 

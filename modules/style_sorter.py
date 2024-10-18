@@ -59,3 +59,51 @@ def search_styles(selected, query):
     unmatched = [y for y in unselected if y not in matched]
     sorted_styles = matched + selected + unmatched
     return gr.CheckboxGroup.update(choices=sorted_styles)
+
+# PROMPTS
+
+all_prompts = []
+
+def try_load_sorted_prompts(prompt_names):
+    global all_prompts
+
+    all_prompts = prompt_names
+
+    try:
+        if os.path.exists('sorted_prompts.json'):
+            with open('sorted_prompts.json', 'rt', encoding='utf-8') as fp:
+                sorted_prompts = []
+                for x in json.load(fp):
+                    if x in all_prompts:
+                        sorted_prompts.append(x)
+                for x in all_prompts:
+                    if x not in sorted_prompts:
+                        sorted_prompts.append(x)
+                all_prompts = sorted_prompts
+    except Exception as e:
+        print('Load style sorting failed.')
+        print(e)
+
+    unselected = [y for y in all_prompts]
+    all_prompts = unselected
+
+    return
+
+
+def sort_prompts(selected):
+    global all_prompts
+    unselected = [y for y in all_prompts if y not in selected]
+    sorted_prompts = selected + unselected
+    return gr.CheckboxGroup.update(choices=sorted_prompts)
+
+
+# def localization_key(x):
+#     return x + localization.current_translation.get(x, '')
+
+
+def search_prompts(selected, query):
+    unselected = [y for y in all_prompts if y not in selected]
+    matched = [y for y in unselected if query.lower() in localization_key(y).lower()] if len(query.replace(' ', '')) > 0 else []
+    unmatched = [y for y in unselected if y not in matched]
+    sorted_prompts = matched + selected + unmatched
+    return gr.CheckboxGroup.update(choices=sorted_prompts)

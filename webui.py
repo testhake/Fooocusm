@@ -18,6 +18,9 @@ import copy
 import launch
 from extras.inpaint_mask import SAMOptions
 
+from modules.sdxl_styles import apply_prompt
+from modules.sdxl_styles import promptsToJson as sdxlPromptsToJson
+from modules.sdxl_styles import prompt_keys as legal_prompt_names
 from modules.sdxl_styles import stylesToJson as sdxlStylesToJson
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
@@ -663,6 +666,42 @@ with shared.gradio_root:
                                                        show_progress=False).then(
                     lambda: None, _js='()=>{refresh_style_localization();}')
 
+            with gr.Tab(label='Prompts', elem_classes=['prompt_selections_tab']):
+                style_sorter.try_load_sorted_prompts(
+                    prompt_names=legal_prompt_names)
+
+                prompt_search_bar = gr.Textbox(show_label=False, container=False,
+                                              placeholder="\U0001F50E Type here to search prompts ...",
+                                              value="",
+                                              label='Search Prompts')
+                prompt_selections = gr.CheckboxGroup(show_label=False, container=False,
+                                                    choices=copy.deepcopy(style_sorter.all_prompts),
+                                                    value=[],
+                                                    label='Selected Prompts',
+                                                    elem_classes=['prompt_selections'])
+
+                prompt_prompts = gr.Textbox(show_label=False, container=False, visible=False,
+                                              value=json.dumps(copy.deepcopy(sdxlPromptsToJson), indent=4),
+                                              label='Prompt Prompts', 
+                                              elem_id="prompt_prompts_json")
+
+                gradio_receiver_prompt_selections = gr.Textbox(elem_id='gradio_receiver_prompt_selections', visible=False)
+
+                shared.gradio_root.load(lambda: gr.update(choices=copy.deepcopy(style_sorter.all_prompts)),
+                                        outputs=prompt_selections)
+
+                prompt_search_bar.change(style_sorter.search_prompts,
+                                        inputs=[prompt_selections, prompt_search_bar],
+                                        outputs=prompt_selections,
+                                        queue=False,
+                                        show_progress=False)
+
+                gradio_receiver_prompt_selections.input(style_sorter.sort_prompts,
+                                                       inputs=prompt_selections,
+                                                       outputs=prompt_selections,
+                                                       queue=False,
+                                                       show_progress=False)
+
             with gr.Tab(label='Models'):
                 with gr.Group():
                     with gr.Row():
@@ -918,7 +957,21 @@ with shared.gradio_root:
 
         state_is_generating = gr.State(False)
 
-        load_data_outputs = [advanced_checkbox, image_number, prompt, negative_prompt, style_selections,
+        #print(f"prompt_selections.value------- {prompt_selections.value}")
+        
+        positive_basic = []
+        negative_basic = []
+        task_customPrompt = prompt_selections.value
+        if(len(task_customPrompt) > 0):
+            for j, s in enumerate(task_customPrompt):
+                p, n = apply_prompt(s)
+                positive_basic = positive_basic + p
+                negative_basic = negative_basic + n
+
+            #print(f"prompt------- {prompt}")
+            #print(f"negative_prompt------- {negative_prompt}")
+
+        load_data_outputs = [advanced_checkbox, image_number, prompt+positive_basic, negative_prompt+negative_basic, style_selections,
                              performance_selection, overwrite_step, overwrite_switch, aspect_ratios_selection,
                              overwrite_width, overwrite_height, guidance_scale, sharpness, adm_scaler_positive,
                              adm_scaler_negative, adm_scaler_end, refiner_swap_method, adaptive_cfg, clip_skip,

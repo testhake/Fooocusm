@@ -44,7 +44,6 @@ for styles_file in styles_files:
                 prompt = entry['prompt'] if 'prompt' in entry else ''
                 negative_prompt = entry['negative_prompt'] if 'negative_prompt' in entry else ''
                 styles[name] = (prompt, negative_prompt)
-                
                 stylesToJson[name] = {"Positive": prompt, "Negative": negative_prompt}
     except Exception as e:
         print(str(e))
@@ -97,3 +96,29 @@ def apply_arrays(text, index):
         i = i+1
     
     return text
+
+# PROMPTS
+prompts_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../sdxl_prompts/'))
+
+prompts = {}
+promptsToJson = {}
+prompt_files = get_files_from_folder(prompts_path, ['.json'])
+
+for prompts_file in prompt_files:
+    try:
+        with open(os.path.join(prompts_path, prompts_file), encoding='utf-8') as f:
+            for entry in json.load(f):
+                name = normalize_key(entry['name'])
+                prompt = entry['prompt'] if 'prompt' in entry else ''
+                negative_prompt = entry['negative_prompt'] if 'negative_prompt' in entry else ''
+                prompts[name] = (prompt, negative_prompt)
+                promptsToJson[name] = {"Positive": prompt, "Negative": negative_prompt}
+    except Exception as e:
+        print(str(e))
+        print(f'Failed to load prompt file {prompts_file}')
+
+prompt_keys = list(prompts.keys())
+
+def apply_prompt(prompt):
+    p, n = prompts[prompt]
+    return p, n
