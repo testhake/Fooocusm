@@ -967,8 +967,8 @@ with shared.gradio_root:
                 p, n = apply_prompt(s)
                 positive_basic = positive_basic + p
                 negative_basic = negative_basic + n
-            prompt.value = prompt.value + p
-            negative_prompt.value = negative_prompt.value + n
+            prompt.value = prompt.value + positive_basic
+            negative_prompt.value = negative_prompt.value + negative_basic
             #print(f"prompt------- {prompt}")
             #print(f"negative_prompt------- {negative_prompt}")
 
