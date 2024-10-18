@@ -121,4 +121,4 @@ prompt_keys = list(prompts.keys())
 
 def apply_prompt(prompt):
     p, n = prompts[prompt]
-    return p, n
+    return p.splitlines(), n.splitlines()
