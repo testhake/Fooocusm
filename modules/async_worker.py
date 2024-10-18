@@ -31,6 +31,7 @@ class AsyncTask:
         self.negative_prompt = args.pop()
         self.translate_prompts = args.pop()
         self.style_selections = args.pop()
+        self.prompt_selections = args.pop()
 
         self.performance_selection = Performance(args.pop())
         self.steps = self.performance_selection.steps()
@@ -1090,6 +1091,19 @@ def worker():
             use_expansion = False
 
         use_style = len(async_task.style_selections) > 0
+
+        task_extra_prompts = async_task.prompt_selections.copy()
+        use_extra_prompts = len(async_task.prompt_selections) > 0
+        if use_extra_prompts:
+            from modules.sdxl_styles import apply_prompt
+            positive_basic = ""
+            negative_basic = ""
+            for j, s in enumerate(task_extra_prompts):
+                    p, n = apply_prompt(s)
+                    positive_basic = positive_basic + p
+                    negative_basic = negative_basic + n
+                async_task.prompt = async_task.prompt + positive_basic
+                async_task.negative_prompt = async_task.negative_prompt + negative_basic
 
         if async_task.base_model_name == async_task.refiner_model_name:
             print(f'Refiner disabled because base model and refiner are same.')

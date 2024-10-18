@@ -18,7 +18,6 @@ import copy
 import launch
 from extras.inpaint_mask import SAMOptions
 
-from modules.sdxl_styles import apply_prompt
 from modules.sdxl_styles import promptsToJson as sdxlPromptsToJson
 from modules.sdxl_styles import prompt_keys as legal_prompt_names
 from modules.sdxl_styles import stylesToJson as sdxlStylesToJson
@@ -959,16 +958,7 @@ with shared.gradio_root:
 
         #print(f"prompt_selections.value------- {prompt_selections.value}")
         
-        positive_basic = ""
-        negative_basic = ""
-        task_customPrompt = prompt_selections.value
-        if(len(task_customPrompt) > 0):
-            for j, s in enumerate(task_customPrompt):
-                p, n = apply_prompt(s)
-                positive_basic = positive_basic + p
-                negative_basic = negative_basic + n
-            prompt.value = prompt.value + positive_basic
-            negative_prompt.value = negative_prompt.value + negative_basic
+        
             #print(f"prompt------- {prompt}")
             #print(f"negative_prompt------- {negative_prompt}")
         load_data_outputs = [advanced_checkbox, image_number, prompt, negative_prompt, style_selections,
@@ -1059,7 +1049,7 @@ with shared.gradio_root:
 
         ctrls = [currentTask, generate_image_grid]
         ctrls += [
-            prompt, negative_prompt, translate_prompts, style_selections,
+            prompt, negative_prompt, translate_prompts, style_selections, prompt_selections, 
             performance_selection, aspect_ratios_selection, image_number, output_format, image_seed,
             read_wildcards_in_order, sharpness, guidance_scale
         ]
