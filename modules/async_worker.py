@@ -1102,8 +1102,8 @@ def worker():
                     p, n = apply_prompt(s)
                     positive_basic = positive_basic + p
                     negative_basic = negative_basic + n
-                async_task.prompt = async_task.prompt + positive_basic
-                async_task.negative_prompt = async_task.negative_prompt + negative_basic
+            async_task.prompt = async_task.prompt + positive_basic
+            async_task.negative_prompt = async_task.negative_prompt + negative_basic
 
         if async_task.base_model_name == async_task.refiner_model_name:
             print(f'Refiner disabled because base model and refiner are same.')
