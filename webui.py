@@ -959,8 +959,8 @@ with shared.gradio_root:
 
         #print(f"prompt_selections.value------- {prompt_selections.value}")
         
-        positive_basic = []
-        negative_basic = []
+        positive_basic = ""
+        negative_basic = ""
         task_customPrompt = prompt_selections.value
         if(len(task_customPrompt) > 0):
             for j, s in enumerate(task_customPrompt):
@@ -971,7 +971,6 @@ with shared.gradio_root:
             negative_prompt.value = negative_prompt.value + negative_basic
             #print(f"prompt------- {prompt}")
             #print(f"negative_prompt------- {negative_prompt}")
-
         load_data_outputs = [advanced_checkbox, image_number, prompt, negative_prompt, style_selections,
                              performance_selection, overwrite_step, overwrite_switch, aspect_ratios_selection,
                              overwrite_width, overwrite_height, guidance_scale, sharpness, adm_scaler_positive,
