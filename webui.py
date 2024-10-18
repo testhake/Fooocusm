@@ -967,11 +967,12 @@ with shared.gradio_root:
                 p, n = apply_prompt(s)
                 positive_basic = positive_basic + p
                 negative_basic = negative_basic + n
-
+            prompt.value = prompt.value + p
+            negative_prompt.value = negative_prompt.value + n
             #print(f"prompt------- {prompt}")
             #print(f"negative_prompt------- {negative_prompt}")
 
-        load_data_outputs = [advanced_checkbox, image_number, prompt+positive_basic, negative_prompt+negative_basic, style_selections,
+        load_data_outputs = [advanced_checkbox, image_number, prompt, negative_prompt, style_selections,
                              performance_selection, overwrite_step, overwrite_switch, aspect_ratios_selection,
                              overwrite_width, overwrite_height, guidance_scale, sharpness, adm_scaler_positive,
                              adm_scaler_negative, adm_scaler_end, refiner_swap_method, adaptive_cfg, clip_skip,
