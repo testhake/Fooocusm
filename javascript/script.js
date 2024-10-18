@@ -102,7 +102,6 @@ function scheduleAfterUiUpdateCallbacks() {
 }
 
 var executedOnLoaded = false;
-
 document.addEventListener("DOMContentLoaded", function() {
     var mutationObserver = new MutationObserver(function(m) {
         if (!executedOnLoaded && gradioApp().querySelector('#generate_button')) {
@@ -120,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     mutationObserver.observe(gradioApp(), {childList: true, subtree: true});
     initStylePreviewOverlay();
+
 });
 
 var onAppend = function(elem, f) {
@@ -185,13 +185,22 @@ document.addEventListener('keydown', function(e) {
 
 function initStylePreviewOverlay() {
     let overlayVisible = false;
+
     const samplesPath = document.querySelector("meta[name='samples-path']").getAttribute("content")
+
     const overlay = document.createElement('div');
     const tooltip = document.createElement('div');
+    const prompts = document.createElement('div');
+
     tooltip.className = 'preview-tooltip';
     overlay.appendChild(tooltip);
+
     overlay.id = 'stylePreviewOverlay';
     document.body.appendChild(overlay);
+
+    prompts.className = 'preview-prompts'
+    document.body.appendChild(prompts);
+
     document.addEventListener('mouseover', function (e) {
         const label = e.target.closest('.style_selections label');
         if (!label) return;
@@ -208,10 +217,26 @@ function initStylePreviewOverlay() {
 
         tooltip.textContent = name;
 
+        //let styleValuesElement = document.getElementById('style_prompts_json').getElementsByTagName("textarea")[0].value;
+        //let styleValues = JSON.parse(styleValuesElement);
+        //let positive, negative = styleValues[name];
+        //let positive = "masterpiece, good";
+        //let negative = "badhands, ugly, bad quality"
+        if (styleValues[name] !== null) {
+            let positive = styleValues[name].Positive;
+            let negative = styleValues[name].Negative;
+            prompts.style.opacity = "1";
+            prompts.innerHTML = `
+  <span style="color: green; font-weight: bold;">Positive: </span> <br> <span style="color: black;">${positive}</span> <br>
+  <span style="color: red; font-weight: bold;">Negative: </span> <br> <span style="color: black;">${negative}</span>
+`;
+        }
+
         function onMouseLeave() {
             overlayVisible = false;
             overlay.style.opacity = "0";
             overlay.style.backgroundImage = "";
+            prompts.style.opacity = "0";
             label.removeEventListener("mouseout", onMouseLeave);
         }
     });
@@ -220,6 +245,9 @@ function initStylePreviewOverlay() {
         overlay.style.left = `${e.clientX}px`;
         overlay.style.top = `${e.clientY}px`;
         overlay.className = e.clientY > window.innerHeight / 2 ? "lower-half" : "upper-half";
+
+        prompts.style.top = `${overlay.offsetTop}px`;
+        prompts.style.left = `${overlay.offsetLeft}px`;
     });
 }
 

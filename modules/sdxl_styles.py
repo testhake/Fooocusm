@@ -23,6 +23,7 @@ def normalize_key(k):
 
 
 styles = {}
+stylesToJson = {}
 styles_files = get_files_from_folder(styles_path, ['.json'])
 
 for x in ['sdxl_styles_fooocus.json',
@@ -43,6 +44,8 @@ for styles_file in styles_files:
                 prompt = entry['prompt'] if 'prompt' in entry else ''
                 negative_prompt = entry['negative_prompt'] if 'negative_prompt' in entry else ''
                 styles[name] = (prompt, negative_prompt)
+                
+                stylesToJson[name] = {"Positive": prompt, "Negative": negative_prompt}
     except Exception as e:
         print(str(e))
         print(f'Failed to load style file {styles_file}')
@@ -94,4 +97,3 @@ def apply_arrays(text, index):
         i = i+1
     
     return text
-

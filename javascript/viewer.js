@@ -57,6 +57,12 @@ onUiLoaded(async () => {
     resized();
 });
 
+let styleValues;
+onUiLoaded(async () => {
+    let styleValuesElement = document.getElementById('style_prompts_json').getElementsByTagName("textarea")[0].value;
+    styleValues = JSON.parse(styleValuesElement);
+});
+
 function on_style_selection_blur() {
     let target = document.querySelector("#gradio_receiver_style_selections textarea");
     target.value = "on_style_selection_blur " + Math.random();

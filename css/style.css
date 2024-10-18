@@ -390,7 +390,7 @@ div:has(> #positive_prompt) {
 }
 
 .contain .tabs .tabitem.style_selections_tab .style_selections .wrap[data-testid="checkbox-group"] label {
-  /* max-width: calc(35% - 15px) !important; */ /* add this to enable 3 columns layout */
+  max-width: calc(35% - 15px) !important; /* add this to enable 3 columns layout */
   flex: calc(50% - 5px) !important;
 }
 
@@ -402,11 +402,23 @@ div:has(> #positive_prompt) {
 
 /* styles preview tooltip */
 .preview-tooltip {
-  background-color: #fff8;
-  font-family: monospace;
-  text-align: center;
-  border-radius: 5px 5px 0px 0px;
-  display: none; /* remove this to enable tooltip in preview image */
+    background-color: #fff8;
+    font-family: monospace;
+    text-align: center;
+    border-radius: 5px 5px 0px 0px;
+    /* display: none; /* remove this to enable tooltip in preview image */
+}
+
+/* styles preview prompts */
+.preview-prompts {
+    background-color: #FFFFFF7F;
+    position: absolute;
+    font-family: monospace;
+    text-align: center;
+    border-radius: 5px 5px 0px 0px;
+    opacity: 0;
+    pointer-events: none;
+    /* display: none; /* remove this to enable tooltip in preview image */
 }
 
 #inpaint_canvas .canvas-tooltip-info {

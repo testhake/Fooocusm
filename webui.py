@@ -18,6 +18,7 @@ import copy
 import launch
 from extras.inpaint_mask import SAMOptions
 
+from modules.sdxl_styles import stylesToJson as sdxlStylesToJson
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
@@ -637,6 +638,12 @@ with shared.gradio_root:
                                                     value=copy.deepcopy(modules.config.default_styles),
                                                     label='Selected Styles',
                                                     elem_classes=['style_selections'])
+
+                style_prompts = gr.Textbox(show_label=False, container=False, visible=False,
+                                              value=json.dumps(copy.deepcopy(sdxlStylesToJson), indent=4),
+                                              label='Style Prompts', 
+                                              elem_id="style_prompts_json")
+
                 gradio_receiver_style_selections = gr.Textbox(elem_id='gradio_receiver_style_selections', visible=False)
 
                 shared.gradio_root.load(lambda: gr.update(choices=copy.deepcopy(style_sorter.all_styles)),
