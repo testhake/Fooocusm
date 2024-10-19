@@ -1,28 +1,29 @@
 [
     {
-        "name": "(main) Pony Default",
+        "name": "(main📟) Pony Default",
         "prompt": "score_9, score_8_up, score_7_up, {prompt}"
     },
     {
-        "name": "(main) Pony Score_4_up Masterpiece",
-        "prompt": "masterpiece, best quality, highly detailed, score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, {prompt}"
-    },
-    {
-        "name": "(main) Pony Negative Default",
+        "name": "(main📟) Pony Default Negatives",
+        "prompt": "score_9, score_8_up, score_7_up, {prompt}",
         "negative_prompt": "score_4, score_5, score_6"
     },
     {
-        "name": "(main_checkpoint) Pony Autism score_4_up",
-        "prompt": "score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, BREAK, {prompt}"
+        "name": "(main📟) Pony Score_4_up Masterpiece",
+        "prompt": "masterpiece, best quality, highly detailed, score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up, {prompt}"
     },
     {
-        "name": "(main_checkpoint) Cyberrealistic",
+        "name": "(main📟) Pony Autism score_4_up",
+        "prompt": "score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up BREAK {prompt}"
+    },
+    {
+        "name": "(main📟) Cyberrealistic",
         "prompt": "score_9, score_8_up, score_7_up, {prompt}",
         "negative_prompt": "score_6, score_5, score_4, source_pony, source_anime, source_furry, source_cartoon, worst quality, low quality"
     },
     {
-        "name": "(main_checkpoint) Pony Realism",
-        "prompt": "score_9, score_8_up, score_7_up, BREAK, {prompt}",
+        "name": "(main📟) Pony Realism",
+        "prompt": "score_9, score_8_up, score_7_up BREAK {prompt}",
         "negative_prompt": "score_4, score_5, score_6"
     }
 ]

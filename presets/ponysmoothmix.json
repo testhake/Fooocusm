@@ -37,11 +37,7 @@
     "default_prompt": "",
     "default_prompt_negative": "",
     "default_styles": [
-        "(main) Pony Default",
-        "(plus_checkpoint) Smoothmix Recommended 1",
-        "(plus_checkpoint) Smoothmix Realism",
-        "(lora) Expressiveh",
-        "(lora) Vixon Gothic Neon"
+        "(main📟) Pony Default Negatives"
     ],
     "default_aspect_ratio": "896*1152",
     "default_overwrite_step": -1,

@@ -37,7 +37,7 @@
     "default_prompt": "",
     "default_prompt_negative": "",
     "default_styles": [
-        "(plus_checkpoint) Realdream Human (negative)"
+        "(main📟) Pony Default Negatives"
     ],
     "default_aspect_ratio": "896*1152",
     "default_overwrite_step": -1,

@@ -1,38 +1,38 @@
 [
-  {
-      "name": "(shot) Selfie",
-      "prompt": "(selfie)"
-  },
-  {
-      "name": "(shot) Backshot",
-      "prompt": "(back-shot rear-shot)"
-  },
-  {
-      "name": "(shot) Closeup",
-      "prompt": "(close-up shot)"
-  },
-  {
-      "name": "(shot) Extreme Closeup",
-      "prompt": "(extreme close-up shot)"
-  },
-  {
-      "name": "(shot) Pov",
-      "prompt": "(pov looking at viewer)"
-  },
-  {
-      "name": "(shot) Low Angle",
-      "prompt": "(low angle shot)"
-  },
-  {
-      "name": "(shot) High Angle",
-      "prompt": "(high angle shot)"
-  },
-  {
-      "name": "(shot) Full",
-      "prompt": "(full shot)"
-  },
-  {
-      "name": "(shot) Wide",
-      "prompt": "(wide shot)"
-  }
+    {
+        "name": "(📷) Selfie",
+        "prompt": "(selfie)"
+    },
+    {
+        "name": "(📷) Backshot",
+        "prompt": "(back-shot rear-shot)"
+    },
+    {
+        "name": "(📷) Closeup",
+        "prompt": "(close-up shot)"
+    },
+    {
+        "name": "(📷) Extreme Closeup",
+        "prompt": "(extreme close-up shot)"
+    },
+    {
+        "name": "(📷) Pov",
+        "prompt": "(pov looking at viewer)"
+    },
+    {
+        "name": "(📷) Low Angle",
+        "prompt": "(low angle shot)"
+    },
+    {
+        "name": "(📷) High Angle",
+        "prompt": "(high angle shot)"
+    },
+    {
+        "name": "(📷) Full",
+        "prompt": "(full shot)"
+    },
+    {
+        "name": "(📷) Wide",
+        "prompt": "(wide shot)"
+    }
 ]

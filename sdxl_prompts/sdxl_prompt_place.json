@@ -1,126 +1,126 @@
 [
   {
-      "name": "(place) Cute Bedroom",
+      "name": "(🏠) Cute Bedroom",
       "prompt": "cute bedroom"
   },
   {
-      "name": "(place) Bedroom",
+      "name": "(🏠) Bedroom",
       "prompt": "bedroom"
   },
   {
-      "name": "(place) Kitchen",
+      "name": "(🏠) Kitchen",
       "prompt": "kitchen"
   },
   {
-      "name": "(place) Dining Room",
+      "name": "(🏠) Dining Room",
       "prompt": "dining room"
   },
   {
-      "name": "(place) Bathroom",
+      "name": "(🏠) Bathroom",
       "prompt": "bathroom"
   },
   {
-      "name": "(place) Living Room",
+      "name": "(🏠) Living Room",
       "prompt": "living room"
   },
   {
-      "name": "(place) Laundry Room",
+      "name": "(🏠) Laundry Room",
       "prompt": "laundry room"
   },
   {
-      "name": "(place) Home Swimming Pool",
+      "name": "(🏠) Home Swimming Pool",
       "prompt": "home backyard swimming-pool"
   },
   {
-      "name": "(place) Backyard",
+      "name": "(🏠) Backyard",
       "prompt": "home backyard"
   },
   {
-      "name": "(place) Attic",
+      "name": "(🏠) Attic",
       "prompt": "dark attic"
   },
   {
-      "name": "(place) Cellar",
+      "name": "(🏠) Cellar",
       "prompt": "dark cellar"
   },
   {
-      "name": "(place) Basement",
+      "name": "(🏠) Basement",
       "prompt": "dark basement"
   },
   {
-      "name": "(place) Loft",
+      "name": "(🏠) Loft",
       "prompt": "loft"
   },
   {
-      "name": "(place) Garage",
+      "name": "(🏠) Garage",
       "prompt": "garage"
   },
   {
-      "name": "(place) Restaurant",
+      "name": "(🏠) Restaurant",
       "prompt": "restaurant"
   },
   {
-      "name": "(place) Restaurant Fancy",
+      "name": "(🏠) Restaurant Fancy",
       "prompt": "fancy restaurant"
   },
   {
-      "name": "(place) Classroom",
+      "name": "(🏠) Classroom",
       "prompt": "school classroom"
   },
   {
-      "name": "(place) Beach",
+      "name": "(🏠) Beach",
       "prompt": "beach"
   },
   {
-      "name": "(place) Hotel Room (rundown)",
+      "name": "(🏠) Hotel Room (rundown)",
       "prompt": "rundown hotel room"
   },
   {
-      "name": "(place) Hotel Room (fancy)",
+      "name": "(🏠) Hotel Room (fancy)",
       "prompt": "fancy hotel room"
   },
   {
-      "name": "(place) Cinema",
+      "name": "(🏠) Cinema",
       "prompt": "cinema"
   },
   {
-      "name": "(place) Church",
+      "name": "(🏠) Church",
       "prompt": "church"
   },
   {
-      "name": "(place) Hospital",
+      "name": "(🏠) Hospital",
       "prompt": "hospital room"
   },
   {
-      "name": "(place) Zoo",
+      "name": "(🏠) Zoo",
       "prompt": "zoo"
   },
   {
-      "name": "(place) Swimming Pool",
+      "name": "(🏠) Swimming Pool",
       "prompt": "public swimming-pool"
   },
   {
-      "name": "(place) Grocery Store",
+      "name": "(🏠) Grocery Store",
       "prompt": "grocery store"
   },
   {
-      "name": "(place) Train",
+      "name": "(🏠) Train",
       "prompt": "inside train"
   },
   {
-      "name": "(place) Car",
+      "name": "(🏠) Car",
       "prompt": "inside car"
   },
   {
-      "name": "(place) Bus",
+      "name": "(🏠) Bus",
       "prompt": "inside bus"
   },
   {
-      "name": "(place) Mall",
+      "name": "(🏠) Mall",
       "prompt": "mall"
   },
   {
-      "name": "(place) Park",
+      "name": "(🏠) Park",
       "prompt": "park"
   }
 ]
